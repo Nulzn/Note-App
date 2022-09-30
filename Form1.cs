@@ -36,7 +36,7 @@ namespace Note_App
         string connectionString = "server=localhost;database=notes;uid=root;pwd=\"\";";
         public void InitSQL()
         {
-            MySqlConfiguration cnn = new MySqlConnection(connectionString);
+            MySqlConnection cnn = new MySqlConnection(connectionString);
 
             try
             {
@@ -53,7 +53,7 @@ namespace Note_App
            try
            {
                 MySqlConnection cnn = new MySqlConnection(connectionString);
-                string query = $"INSERT INTO notes(Text) VALUES ({text.Text})";
+                string query = $"INSERT INTO notes(Text) VALUES ({text.Text.ToString()})";
 
                 MySqlCommand cmd = new MySqlCommand(query, cnn);
                 MySqlDataReader dataReader;
