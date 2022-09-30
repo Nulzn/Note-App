@@ -13,14 +13,28 @@ namespace Note_App
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Opens Create Note Frame
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // Creates The Note
+
+            var mySQL = new MySQL();
+            mySQL.Insert();
+        }
     }
 
     public class MySQL
     {
+        MySqlConnection cnn;
         public void InitSQL()
         {
             string connectionString = null;
-            MySqlConnection cnn;
 
             connectionString = "server=localhost;database=notes;uid=root;pwd=\"\";";
 
@@ -29,13 +43,16 @@ namespace Note_App
             try
             {
                 cnn.Open();
-                MessageBox.Show("Connection Open!");
-                cnn.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Connection Closed!");
             }
+        }
+
+        public void Insert(TextBox text)
+        {
+
         }
     }
 
