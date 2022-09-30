@@ -1,9 +1,11 @@
 using MySql.Data.MySqlClient;
+using System.Runtime.CompilerServices;
 
 namespace Note_App
 {
     public partial class Form1 : Form
     {
+        
         public Form1()
         {
             InitializeComponent();
@@ -25,20 +27,16 @@ namespace Note_App
             // Creates The Note
 
             var mySQL = new MySQL();
-            mySQL.Insert();
+            mySQL.Insert(newNote);
         }
     }
 
     public class MySQL
     {
-        MySqlConnection cnn;
+        string connectionString = "server=localhost;database=notes;uid=root;pwd=\"\";";
         public void InitSQL()
         {
-            string connectionString = null;
-
-            connectionString = "server=localhost;database=notes;uid=root;pwd=\"\";";
-
-            cnn = new MySqlConnection(connectionString);
+            MySqlConfiguration cnn = new MySqlConnection(connectionString);
 
             try
             {
@@ -52,7 +50,29 @@ namespace Note_App
 
         public void Insert(TextBox text)
         {
+           try
+           {
+                MySqlConnection cnn = new MySqlConnection(connectionString);
+                string query = $"INSERT INTO notes(Text) VALUES ({text.Text})";
 
+                MySqlCommand cmd = new MySqlCommand(query, cnn);
+                MySqlDataReader dataReader;
+
+                cnn.Open();
+                dataReader = cmd.ExecuteReader();
+
+                MessageBox.Show("Saved Data!");
+
+                while (dataReader.Read())
+                {
+
+                }
+                cnn.Clone();
+           }
+           catch (Exception ex)
+           {
+                MessageBox.Show(ex.Message);
+           }
         }
     }
 

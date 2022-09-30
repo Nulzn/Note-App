@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Note-App": {
+      "commandName": "Project",
+      "sqlDebugging": true
+    }
+  }
+}
